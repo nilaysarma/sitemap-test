@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://sitemap-test.vercel.app/about/</loc></url>
-  <url><loc>https://sitemap-test.vercel.app/contact/</loc></url>
-  <url><loc>https://sitemap-test.vercel.app/</loc></url>
-  <url><loc>https://sitemap-test.vercel.app/products/</loc></url>
-  <url><loc>https://sitemap-test.vercel.app/products/laptops/</loc></url>
-  <url><loc>https://sitemap-test.vercel.app/products/smartphones/</loc></url>
+  <url>
+    <loc>https://sitemap-test.vercel.app/about/</loc>
+    <lastmod>2025-06-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sitemap-test.vercel.app/contact/</loc>
+    <lastmod>2025-06-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sitemap-test.vercel.app/</loc>
+    <lastmod>2025-06-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sitemap-test.vercel.app/products/</loc>
+    <lastmod>2025-06-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sitemap-test.vercel.app/products/laptops/</loc>
+    <lastmod>2025-06-28</lastmod>
+  </url>
+  <url>
+    <loc>https://sitemap-test.vercel.app/products/smartphones/</loc>
+    <lastmod>2025-06-28</lastmod>
+  </url>
 </urlset>
