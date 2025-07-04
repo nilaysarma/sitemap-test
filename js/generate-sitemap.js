@@ -1,9 +1,9 @@
-// js/generate-sitemap.js
 const fs = require("fs");
 const path = require("path");
+const { execSync } = require("child_process");
 
-const baseUrl = "https://sitemap-test.vercel.app"; // Change to your domain
-const rootDir = path.resolve(__dirname, ".."); // go up from /js to root
+const baseUrl = "https://sitemap-test.vercel.app"; // Your domain
+const rootDir = path.resolve(__dirname, "..");
 
 function walkDir(dir, callback) {
   const items = fs.readdirSync(dir);
@@ -17,7 +17,7 @@ function walkDir(dir, callback) {
     if (stat.isDirectory()) {
       walkDir(filepath, callback);
     } else if (filepath.endsWith(".html")) {
-      callback(filepath, stat.mtime);
+      callback(filepath);
     }
   }
 }
@@ -28,10 +28,21 @@ function getRoute(filepath) {
   return relative === "" ? "/" : "/" + relative;
 }
 
+function getGitLastModifiedDate(filepath) {
+  try {
+    const output = execSync(`git log -1 --format="%ad" --date=short -- "${filepath}"`, {
+      cwd: rootDir
+    }).toString().trim();
+    return output || new Date().toISOString().split("T")[0]; // fallback to today
+  } catch (err) {
+    return new Date().toISOString().split("T")[0]; // fallback on error
+  }
+}
+
 const urls = [];
-walkDir(rootDir, (filePath, mtime) => {
+walkDir(rootDir, (filePath) => {
   const route = getRoute(filePath);
-  const lastmod = new Date(mtime).toISOString().split("T")[0];
+  const lastmod = getGitLastModifiedDate(filePath);
   urls.push({ route, lastmod });
 });
 
@@ -46,4 +57,4 @@ ${urls.map(({ route, lastmod }) => `  <url>
 </urlset>`;
 
 fs.writeFileSync(path.join(rootDir, "sitemap.xml"), sitemap);
-console.log("✅ sitemap.xml generated in root.");
+console.log("✅ sitemap.xml generated using Git commit dates.");
